@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  web:
+    image: dpage/pgadmin4
+    user: root
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=postgres@local.host
+      - PGADMIN_DEFAULT_PASSWORD=fooBar
+      - PGADMIN_LISTEN_PORT=5050
+    ports:
+      - "5050:5050"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+      - ~/.ssh:/var/lib/pgadmin/storage/postgres_local.host/.ssh
+    restart: unless-stopped
+
+volumes:
+  pgadmin-data: {}
